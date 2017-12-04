@@ -23,6 +23,8 @@ public class App
          * reference myObject
          *
          * http://checkerframework.org
+         
+         Test  added
          */
         System.out.println("... but thankfully, Checker has our back: http://checkerframework.org");
     }
