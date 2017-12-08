@@ -32,32 +32,5 @@
     wait_for: hostname={{ item.public_ip }} port=22 delay=60 timeout=320 state=started
     with_items: "{{ ec2.instances }}"
 
- # - include: ec2.yml	
-  - name: Connect ec2hosts and run jar file
-  
-     - hosts: ec2hosts
-       tasks:
-
-       - name: Install java 8 preresequesits
-         apt: name=python-software-properties
-
-       - name: Add Java 8 repository
-         apt_repository: repo='ppa:webupd8team/java'
-
-       - name: Agree to oracle license
-         debconf: name=oracle-java8-installer question=shared/accepted-oracle-license-v1-1 vtype=select value=true
-
-       - name: Install Java 8
-         apt: name=oracle-java8-installer force=yes
-	
-       - name: copy jar file to ec2host	
-	     copy: 
-           src: /opt/my-app/target/my-app-1.0-SNAPSHOT.jar
-           dest: /opt/my-app-1.0-SNAPSHOT.jar
-	  
-       - name: Change the working directory to /opt before executing jar the command.
-         shell: java -jar my-app-1.0-SNAPSHOT.jar
-         args:
-          chdir: /opt  
-  
-      
+  - include: ec2hosts.yml	
+ 
